@@ -4,38 +4,10 @@ class TravelerBucketList
   attr_reader :prompt
   attr_accessor :traveler
 
+
   def initialize
     @prompt = TTY::Prompt.new
   end
-
-  def welcome
-    puts "Hello!"
-  end
-
-  def welcome_menu
-    prompt.select ("Welcome to our our Application. What would you like to do?") do |menu|
-        menu.choice "See All Wishes", -> { puts "You chose 1" }
-        menu.choice "See All Destinations", -> { puts "You chose 2" }
-        menu.choice "Create a User", -> { Traveler.create_new_traveler() }
-    end
-  end
-  
-
-  def user_helper
-    travelerReturnValue = Traveler.register()
-        until travelerReturnValue
-            travelerReturnValue = Traveler.register
-        end
-        self.traveler = travelerReturnValue
-        self.main_menu
-    end
-
-  #   def main_menu
-  #       puts "Welcome, #{self.traveler.name}"
-  #       prompt.select{"Choose something to do"} do |menu|
-  #           menu.choiсe "See my wishes"
-  #       end
-  #   end
 
   def run
     welcome
@@ -44,6 +16,50 @@ class TravelerBucketList
     # wanna_see_favs?
     # get_joke(what_subject)
   end
+
+
+  def welcome
+    puts "Hello, Traveler!"
+  end
+
+  def welcome_menu
+    prompt.select ("Welcome to our Application. What would you like to do?") do |menu|
+        menu.choice "See All Wishes", -> { display_wishes }
+        menu.choice "See All Destinations", -> { display_destinations }
+        menu.choice "Create a User", -> { Traveler.create_new_traveler() }
+    end
+  end
+  
+
+  def display_wishes
+    Wish.all.map do |wish|
+      puts wish.wish_note
+    end
+  end
+
+  def display_destinations
+    Destination.all.map do |destination|
+      puts destination.destination_name
+    end
+  end
+
+  # def user_helper
+  #   travelerReturnValue = Traveler.register()
+  #       until travelerReturnValue
+  #           travelerReturnValue = Traveler.register
+  #       end
+  #       self.traveler = travelerReturnValue
+  #       self.main_menu
+  #   end
+
+  #   def main_menu
+  #       puts "Welcome, #{self.traveler.name}"
+  #       prompt.select{"Choose something to do"} do |menu|
+  #           menu.choiсe "See my wishes"
+  #       end
+  #   end
+
+  
 
   private
   

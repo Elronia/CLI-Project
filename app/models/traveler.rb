@@ -6,5 +6,11 @@ class Traveler < ActiveRecord::Base
       travelerInfo = TTY::Prompt.new.ask("What is your username?")
       ageInfo = TTY::Prompt.new.ask("What is your age?")
       traveler = Traveler.create(traveler_name: travelerInfo, traveler_age: ageInfo)
+
+    #   if Traveler.find_by(name: travelerInfo) 
+    #     puts "Sorry, it looks like that username is taken."
+    # else
+    #     Traveler.create(name: travelerInfo, age: ageInfo.to_i)
+    # end
     end
 end
