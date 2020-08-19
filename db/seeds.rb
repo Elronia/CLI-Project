@@ -2,10 +2,10 @@ Traveler.destroy_all
 Wish.destroy_all
 Destination.destroy_all
 BucketListItem.destroy_all
-# Traveler.reset_pk_sequence
-# Wish.reset_pk_sequence
-# Destination.reset_pk_sequence
-# BucketListItem.reset_pk_sequence
+Traveler.reset_pk_sequence
+Wish.reset_pk_sequence
+Destination.reset_pk_sequence
+BucketListItem.reset_pk_sequence
 
 ########### different ways to write your seeds ############
 #1: save everything to variables (makes it easy to connect models, best for when you want to be intentional about your seeds)
