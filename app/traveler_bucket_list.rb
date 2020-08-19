@@ -43,7 +43,7 @@ class TravelerBucketList
   end
 
   def main_menu
-    binding.pry
+    # binding.pry
     traveler.reload #makes sure that we get the most up to date info
     system "clear" #pushes this to the top of the terminal
     puts "Welcome, #{self.traveler.traveler_name}"
