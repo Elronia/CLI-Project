@@ -109,9 +109,9 @@ class TravelerBucketList
     #   remove_my_bucket_list
     # end
 
-    # def create_a_wish
-    #   wish = Wish.create(destination_id)
-    # end
+    def create_a_wish
+      wish = Wish.create(destination_id)
+    end
 
     def create_a_bucket_list
       BucketListItem.create(traveler_id: @@traveler_found.id, wish_id: Wish.)
