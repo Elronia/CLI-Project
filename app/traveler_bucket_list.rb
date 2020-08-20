@@ -26,13 +26,35 @@ class TravelerBucketList
 
   def welcome_menu
     @prompt.select ("Welcome to your Bucket List App. What would you like to do?") do |menu|
-        menu.choice "See All Wishes", -> { display_and_add_wishes }
-        menu.choice "See All Destinations", -> { display_destinations }
         menu.choice "Log In", -> { log_in }
         menu.choice "Create a User", -> { Traveler.create_new_traveler() }
     end
   end
-  
+
+  def display_and_add_wishes
+    chosen_wish = prompt.select("Please choose your wish", Wish.all_wishes)
+    binding.pry
+    # wish = Wish.create(wish_note: wish.wish_note, destination_id: destination.id)
+    bucket_list = BucketListItem.create(wish_completed: false, traveler_id: @@traveler_found.id, wish_id: chosen_wish)
+    puts "Saved to your Bucket List"
+    sleep(2)
+  end
+
+  #create a new option in a main menu "Complete a wish"
+  #invoke a helper methos "Complete a wish"
+  #inside of this helper method show the user all the bucket list
+  #select one to complete (bucket_list_items)
+  #selected.bucket_list update method on it and changing completed to true
+
+  #destroy the instance
+
+  def create_another_wish_helper
+    @prompt.select ("Would you like to add another wish?") do |menu|
+      menu.choice "Yes", -> { display_and_add_wishes }
+      menu.choice "No", -> { main_menu }
+    end
+  end
+
   def display_wishes
     Wish.all.map do |wish|
       puts wish.wish_note
@@ -52,18 +74,18 @@ class TravelerBucketList
 
     @@traveler_found = Traveler.find_by(traveler_name: username_input, traveler_age: username_age)
 
-    if !@@traveler_found
-      puts "\nSorry, invalid username and/or age"
-      @prompt.select(" ", cycle: true) do |menu|
-        menu.choice "Try Again", -> {log_in} 
-        menu.choice "Go Back", -> {welcome_menu} 
+      if !@@traveler_found
+        puts "\nSorry, invalid username and/or age"
+          @prompt.select(" ", cycle: true) do |menu|
+          menu.choice "Try Again", -> {log_in} 
+          menu.choice "Go Back", -> {welcome_menu} 
       end
-    else
-      puts "\nLog In Successful!\n"
-      print "\nTaking you to Main Menu"
-      # sleep(0.2)
-      main_menu
-    end
+      else
+        puts "\nLog In Successful!\n"
+        print "\nTaking you to Main Menu"
+        # sleep(0.2)
+        main_menu
+      end
   end
 
   # def user_helper
@@ -75,14 +97,21 @@ class TravelerBucketList
   #       self.main_menu
   #   end
 
-  #*************************************** Main_menu: ****************************************************************
-
+  #***************************************Main_menu:***************************************************
+  # menu.choice "See All Wishes", -> { display_and_add_wishes }
+  # menu.choice "See All Destinations", -> { display_destinations }
     def main_menu
       system "clear"
         puts "Where are we going?"
-        answers = @prompt.select("SELECT AN OPTION:\n ", "View my bucket list", "Create a new bucket list") 
+        answers = @prompt.select("SELECT AN OPTION:\n ", "View my bucket list", "Create a new bucket list","See All Wishes", "See All Destinations") 
           if answers == "View my bucket list"
             puts "Hello"
+          elsif answers == "Create new bucket list"
+            puts "See your bucket list"
+          elsif answers == "See All Wishes"
+            display_and_add_wishes
+          elsif answers == "See All Destinations"
+            puts "See your destinations"
           else 
             bucket_list
           end
@@ -104,15 +133,7 @@ class TravelerBucketList
     #   remove_my_bucket_list
     # end
 
-    def display_and_add_wishes
-      chosen_wish = prompt.select("Please choose your wish", Wish.all_wishes)
-      # wish = Wish.create(wish_note: wish.wish_note, destination_id: destination.id)
-      bucket_list = BucketListItem.create(wish_completed: false, traveler_id: @@traveler_found.id, wish_id: chosen_wish.id)
-      binding.pry
-      puts "Saved to your Bucket List"
-      sleep(0.3)
-    end
-
+    
     # def display_traveler_bucket_list_items
     #   # self.user <- Person who is logged in
     #   # self.user.plants <- All of the plants associated with the User

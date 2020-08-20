@@ -6,7 +6,7 @@ class Wish < ActiveRecord::Base
   
   def self.all_wishes
     Wish.all.map do |wish|
-      { wish.wish_note => wish.id }
+      { wish.wish_note => wish.id } 
     end
   end
 
