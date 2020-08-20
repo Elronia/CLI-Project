@@ -1,3 +1,4 @@
+require 'pry'
 class TravelerBucketList
   # here will be your CLI!
   # it is not an AR class so you need to add attr
@@ -18,15 +19,14 @@ class TravelerBucketList
   # create_a_user: -create an account,
   # -go to main menu
   # log_in: -main_menu
-  
-
+#****************************************** Welcome *******************************************************
   def welcome
     puts "Hello, Traveler!"
   end
 
   def welcome_menu
     @prompt.select ("Welcome to your Bucket List App. What would you like to do?") do |menu|
-        menu.choice "See All Wishes", -> { display_wishes }
+        menu.choice "See All Wishes", -> { display_and_add_wishes }
         menu.choice "See All Destinations", -> { display_destinations }
         menu.choice "Log In", -> { log_in }
         menu.choice "Create a User", -> { Traveler.create_new_traveler() }
@@ -52,7 +52,6 @@ class TravelerBucketList
 
     @@traveler_found = Traveler.find_by(traveler_name: username_input, traveler_age: username_age)
 
-
     if !@@traveler_found
       puts "\nSorry, invalid username and/or age"
       @prompt.select(" ", cycle: true) do |menu|
@@ -76,7 +75,7 @@ class TravelerBucketList
   #       self.main_menu
   #   end
 
-  # main_menu:
+  #*************************************** Main_menu: ****************************************************************
 
     def main_menu
       system "clear"
@@ -85,7 +84,7 @@ class TravelerBucketList
           if answers == "View my bucket list"
             puts "Hello"
           else 
-            create_a_bucket_list
+            bucket_list
           end
         #     menu.choiсe "View my bucket list", -> { puts "Hello" }
         #     menu.choice "Create a new bucket list", -> { create_a_bucket_list }
@@ -105,22 +104,29 @@ class TravelerBucketList
     #   remove_my_bucket_list
     # end
 
-    def choose_a_wish
+    def display_and_add_wishes
       chosen_wish = prompt.select("Please choose your wish", Wish.all_wishes)
-      wish = Wish.create(wish_note: wish.wish_note, destination_id: destination.id)
-
-      bucket_list = BucketListItem.create(traveler_id: @@traveler_found.id, wish_id: wish.id)
+      # wish = Wish.create(wish_note: wish.wish_note, destination_id: destination.id)
+      bucket_list = BucketListItem.create(wish_completed: false, traveler_id: @@traveler_found.id, wish_id: chosen_wish.id)
+      binding.pry
       puts "Saved to your Bucket List"
       sleep(0.3)
     end
 
-    # def create_a_bucket_list
-    #   binding.pry
-    #   BucketListItem.create(wish_completed: false, traveler_id: @@traveler_found.id, wish_id: wish.id)
-    #   puts "Saved to your Bucket List"
-    #   sleep(0.3)
-    # end
+    # def display_traveler_bucket_list_items
+    #   # self.user <- Person who is logged in
+    #   # self.user.plants <- All of the plants associated with the User
+    #   # self.user.plant_parenthoods <- All of the PlantParenthood instances 
+    #   self.traveler.bucket_list_items.each do |item|
+    #       puts uph.traveler.name
+    #       puts uph.affection
+    #       puts "*******"
+    #   end
 
+    #    sleep 5
+    #    self.main_menu
+    #   # self.main_menu <- To take me back to the main_menu
+    # end
 
     # def mark_completed
 

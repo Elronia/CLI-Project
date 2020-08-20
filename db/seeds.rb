@@ -1,3 +1,4 @@
+
 Traveler.destroy_all
 Wish.destroy_all
 Destination.destroy_all
@@ -35,9 +36,9 @@ destination8 = Destination.create(destination_name: "Spain")
 destination9 = Destination.create(destination_name: "Belize")
 destination10 = Destination.create(destination_name: "Russia")
 
-bucket_list1 = BucketListItem.create(traveler_id: 1, wish_id: 1)
-bucket_list2 = BucketListItem.create(traveler_id: 2, wish_id: 2)
-bucket_list3 = BucketListItem.create(traveler_id: 3, wish_id: 3)
+bucket_list1 = BucketListItem.create(wish_completed: false, traveler_id: 1, wish_id: 1)
+bucket_list2 = BucketListItem.create(wish_completed: false, traveler_id: 2, wish_id: 2)
+bucket_list3 = BucketListItem.create(wish_completed: false, traveler_id: 3, wish_id: 3)
 
 
 

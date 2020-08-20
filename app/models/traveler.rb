@@ -5,6 +5,7 @@ class Traveler < ActiveRecord::Base
     def self.create_new_traveler
         travelerInfo = TTY::Prompt.new.ask("What is your username?")
         ageInfo = TTY::Prompt.new.ask("What is your age?")
+        
         if Traveler.find_by(traveler_name: travelerInfo, traveler_age: ageInfo) 
             puts "Sorry, it looks like that username #{travelerInfo} is already taken."
         else
