@@ -65,7 +65,6 @@ class TravelerBucketList
       # sleep(0.2)
       main_menu
     end
-
   end
 
   # def user_helper
@@ -76,7 +75,6 @@ class TravelerBucketList
   #       self.traveler = travelerReturnValue
   #       self.main_menu
   #   end
-
 
   # main_menu:
 
@@ -107,22 +105,27 @@ class TravelerBucketList
     #   remove_my_bucket_list
     # end
 
-    def create_a_wish
-      wish = Wish.create(destination_id)
-    end
+    def choose_a_wish
+      chosen_wish = prompt.select("Please choose your wish", Wish.all_wishes)
+      wish = Wish.create(wish_note: wish.wish_note, destination_id: destination.id)
 
-    def create_a_bucket_list
-      BucketListItem.create(traveler_id: @@traveler_found.id, wish_id: Wish.)
+      bucket_list = BucketListItem.create(traveler_id: @@traveler_found.id, wish_id: wish.id)
       puts "Saved to your Bucket List"
       sleep(0.3)
     end
 
-    
+    # def create_a_bucket_list
+    #   binding.pry
+    #   BucketListItem.create(wish_completed: false, traveler_id: @@traveler_found.id, wish_id: wish.id)
+    #   puts "Saved to your Bucket List"
+    #   sleep(0.3)
+    # end
+
 
     # def mark_completed
 
     # end
 
-  private
+  # private
   
 end
