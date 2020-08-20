@@ -89,7 +89,7 @@ class TravelerBucketList
           if answers == "View my bucket list"
             puts "Hello"
           else 
-            create_a_bucket_list
+            bucket_list
           end
         #     menu.choiсe "View my bucket list", -> { puts "Hello" }
         #     menu.choice "Create a new bucket list", -> { create_a_bucket_list }
@@ -109,12 +109,13 @@ class TravelerBucketList
     #   remove_my_bucket_list
     # end
 
-    def create_a_wish
-      wish = Wish.create(destination_id)
-    end
+    
 
-    def create_a_bucket_list
-      BucketListItem.create(traveler_id: @@traveler_found.id, wish_id: Wish.)
+    def display_and_add_wishes
+      chosen_wish = prompt.select("Please choose your wish", Wish.all_wishes)
+      # wish = Wish.create(wish_note: wish.wish_note, destination_id: destination.id)
+      bucket_list = BucketListItem.create(wish_completed: false, traveler_id: @@traveler_found.id, wish_id: chosen_wish.id)
+      binding.pry
       puts "Saved to your Bucket List"
       sleep(0.3)
     end
@@ -125,6 +126,6 @@ class TravelerBucketList
 
     # end
 
-  private
+  # private
   
 end
