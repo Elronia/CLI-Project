@@ -40,11 +40,19 @@ class TravelerBucketList
     sleep(2)
   end
 
+  def complete_a_wish
+    # chosen_bucket_list_item = prompt.select("Please select one wish to complete", BucketListItem.all_bucket_list_items)
+    chosen_wish = prompt.select("Please choose your wish", Wish.all_wishes)
+    BucketListItem.find_by(wish_id: chosen_wish)
+    bucket_list = BucketListItem.update(wish_completed: true, traveler_id: @@traveler_found.id, wish_id: chosen_wish)
+    puts "Your wish is complete"
+  end
+
   #create a new option in a main menu "Complete a wish"
-  #invoke a helper methos "Complete a wish"
+  #invoke a helper method "Complete a wish"
   #inside of this helper method show the user all the bucket list
   #select one to complete (bucket_list_items)
-  #selected.bucket_list update method on it and changing completed to true
+  #selected bucket_list update method on it and changing completed to true
 
   #destroy the instance
 
@@ -97,13 +105,14 @@ class TravelerBucketList
   #       self.main_menu
   #   end
 
-  #***************************************Main_menu:***************************************************
+  #***************************************Main_menu:*********************************
+
   # menu.choice "See All Wishes", -> { display_and_add_wishes }
   # menu.choice "See All Destinations", -> { display_destinations }
     def main_menu
       system "clear"
         puts "Where are we going?"
-        answers = @prompt.select("SELECT AN OPTION:\n ", "View my bucket list", "Create a new bucket list","See All Wishes", "See All Destinations") 
+        answers = @prompt.select("SELECT AN OPTION:\n ", "View my bucket list", "Create a new bucket list","See All Wishes", "See All Destinations", "Complete a wish") 
           if answers == "View my bucket list"
             puts "Hello"
           elsif answers == "Create new bucket list"
@@ -112,6 +121,8 @@ class TravelerBucketList
             display_and_add_wishes
           elsif answers == "See All Destinations"
             puts "See your destinations"
+          elsif answers == "Complete a wish"
+            complete_a_wish
           else 
             bucket_list
           end
