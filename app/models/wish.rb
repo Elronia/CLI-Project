@@ -1,11 +1,12 @@
 class Wish < ActiveRecord::Base
+
   belongs_to :destination
   has_many :bucket_list_items
   has_many :travelers, through: :bucket_list_items
-
+  
   def self.all_wishes
     Wish.all.map do |wish|
-      { wish.wish_note => wish.id }
+      { wish.wish_note => wish.id } 
     end
   end
 
@@ -15,5 +16,5 @@ class Wish < ActiveRecord::Base
       wish
     end
   end
-  
+
 end

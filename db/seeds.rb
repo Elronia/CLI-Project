@@ -1,11 +1,12 @@
+
 Traveler.destroy_all
 Wish.destroy_all
 Destination.destroy_all
 BucketListItem.destroy_all
-# Traveler.reset_pk_sequence
-# Wish.reset_pk_sequence
-# Destination.reset_pk_sequence
-# BucketListItem.reset_pk_sequence
+Traveler.reset_pk_sequence
+Wish.reset_pk_sequence
+Destination.reset_pk_sequence
+BucketListItem.reset_pk_sequence
 
 ########### different ways to write your seeds ############
 #1: save everything to variables (makes it easy to connect models, best for when you want to be intentional about your seeds)
@@ -35,9 +36,9 @@ destination8 = Destination.create(destination_name: "Spain")
 destination9 = Destination.create(destination_name: "Belize")
 destination10 = Destination.create(destination_name: "Russia")
 
-bucket_list1 = BucketListItem.create(traveler_id: 1, wish_id: 1)
-bucket_list2 = BucketListItem.create(traveler_id: 2, wish_id: 2)
-bucket_list3 = BucketListItem.create(traveler_id: 3, wish_id: 3)
+bucket_list1 = BucketListItem.create(wish_completed: false, traveler_id: 1, wish_id: 1)
+bucket_list2 = BucketListItem.create(wish_completed: false, traveler_id: 2, wish_id: 2)
+bucket_list3 = BucketListItem.create(wish_completed: false, traveler_id: 3, wish_id: 3)
 
 
 
