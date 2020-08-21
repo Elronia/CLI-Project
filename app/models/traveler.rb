@@ -9,7 +9,7 @@ class Traveler < ActiveRecord::Base
         if Traveler.find_by(traveler_name: travelerInfo, traveler_age: ageInfo) 
             puts "Sorry, it looks like that username #{travelerInfo} is already taken."
         else
-            Traveler.create(traveler_name: travelerInfo, traveler_age: ageInfo.to_i)
+           Traveler.create(traveler_name: travelerInfo, traveler_age: ageInfo.to_i)
         end
     end
     
