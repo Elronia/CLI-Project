@@ -44,17 +44,26 @@ class TravelerBucketList
     sleep(2)
   end
 
-  def create_a_new_bucket_list
-    new_var = BucketListItem.all.last.id
-    new_wish = Wish.find(new_var)
-    sec = new_wish.wish_note
-    sec_var = new_wish.destination_id
-    find_dest = Destination.find(sec_var).destination_name
-    puts "Hello #{self.traveler.traveler_name}. You have created this wish #{sec} and add this destination #{find_dest}"
-    # binding.pry
-    sleep(5)
-    main_menu
-  end
+  # def create_a_new_bucket_list
+  #   prompt.select("Which wish would you like?") do |menu|
+  #     Wish.all.each do |wish|
+  #       menu.choice "#{wish.wish_note}"
+  #     end
+  #   end
+  # prompt.ask
+  # end
+  
+  # #   h.wish_note
+  #   sec_var = new_wish.destination_id
+  #   find_dest = Destination.find(sec_var).destination_name
+  #   puts "Hnew_var = BucketListItem.all.last.id
+  #   new_wish = Wish.find(new_var)
+  #   sec = new_wisello #{self.traveler.traveler_name}. You have created this wish #{sec} and add this destination #{find_dest}"
+  #   # binding.pry
+  #   sleep(5)
+  #   main_menu
+  # end
+
   # def complete_a_wish
   #   # chosen_bucket_list_item = prompt.select("Please select one wish to complete", BucketListItem.all_bucket_list_items)
   #   chosen_wish = prompt.select("Please choose your wish", Wish.all_wishes)
@@ -144,17 +153,17 @@ class TravelerBucketList
     def main_menu
       system "clear"
         puts "Where are we going?"
-        answers = @prompt.select("SELECT AN OPTION:\n ", "View my bucket list", "Create a new bucket list","See All Wishes", "See All Destinations") #, "Complete a wish") 
+        answers = @prompt.select("SELECT AN OPTION:\n ", "View my bucket list", "See All Wishes", "See All Destinations") #, "Complete a wish") 
           if answers == "View my bucket list"
             view_my_bucket_list
-          elsif answers == "Create new bucket list"
-            create_a_new_bucket_list
+          # elsif answers == "Create a new bucket list"
+          #   create_a_new_bucket_list
           elsif answers == "See All Wishes"
             display_and_add_wishes
           elsif answers == "See All Destinations"
             display_destinations
-          # elsif answers == "Complete a wish"
-          #   complete_a_wish
+          elsif answers == "Complete a wish"
+            complete_a_wish
           else 
             bucket_list
           end
